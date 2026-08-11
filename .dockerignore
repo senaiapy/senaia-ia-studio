@@ -11,3 +11,27 @@ coverage
 .env.local
 .env.development
 .env.production
+
+# Locally generated dev artefacts that must never enter the build context.
+.certs
+playwright-report
+blob-report
+
+# Not used at runtime. `assets/skills/*` is duplicated as inline template
+# strings in src/lib/skills/packaged.ts, so the app never reads this directory.
+assets
+docs
+tests
+*.md
+
+# Repo screenshots — home-screen.png alone is 2.1 MB.
+home-screen.png
+readme-image.png
+
+# Stray root-level scratch scripts, not part of the app.
+get_angles.js
+get_angles2.js
+make_continents.js
+test_patches*.js
+test_coords.js
+test-textures.js

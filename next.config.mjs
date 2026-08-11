@@ -1,5 +1,14 @@
-import type { NextConfig } from "next";
+// Plain ESM rather than TypeScript on purpose.
+//
+// The custom server loads this file at runtime, but `typescript` is a
+// devDependency, so it is absent from the production image (installed with
+// `npm ci --omit=dev`). A .ts config would need Next to transpile it at boot
+// and crash the runner stage. Keeping it .mjs removes that dependency entirely.
+
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const securityHeaders = [
   {
@@ -56,9 +65,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const nextConfig: NextConfig = {
+/** @type {import("next").NextConfig} */
+const nextConfig = {
   turbopack: {
-    root: path.resolve(__dirname),
+    root: path.resolve(dirname),
   },
   async headers() {
     return [
