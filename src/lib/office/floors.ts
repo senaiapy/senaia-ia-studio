@@ -80,8 +80,8 @@ export const OFFICE_FLOORS: readonly FloorDefinition[] = [
   },
   {
     id: "claw3d-runtime",
-    label: "Claw3D Runtime Floor",
-    shortLabel: "Claw3D",
+    label: "SENAIA-IA Runtime Floor",
+    shortLabel: "SENAIA",
     provider: "claw3d",
     kind: "runtime",
     zone: "building",
