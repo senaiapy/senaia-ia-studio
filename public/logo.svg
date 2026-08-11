@@ -1,29 +1,209 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024"
      role="img" aria-label="SENAIA-IA">
   <title>SENAIA-IA</title>
+  <desc>Multi-channel AI assistant control panel</desc>
   <defs>
-    <linearGradient id="senaia-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2563eb"/>
-      <stop offset="0.55" stop-color="#4f46e5"/>
-      <stop offset="1" stop-color="#7c3aed"/>
+    <linearGradient id="sn-sweep" gradientUnits="userSpaceOnUse"
+        x1="4397.2" y1="8574.7" x2="5313.8" y2="5154.1">
+      <stop offset="0.0357" stop-color="#f20161"/>
+      <stop offset="0.1071" stop-color="#e70060"/>
+      <stop offset="0.1786" stop-color="#da005f"/>
+      <stop offset="0.25" stop-color="#cc005f"/>
+      <stop offset="0.3214" stop-color="#b20151"/>
+      <stop offset="0.3929" stop-color="#b1145b"/>
+      <stop offset="0.4643" stop-color="#fb2c38"/>
+      <stop offset="0.5357" stop-color="#fb213a"/>
+      <stop offset="0.6071" stop-color="#fa1723"/>
+      <stop offset="0.6786" stop-color="#fa1022"/>
+      <stop offset="0.75" stop-color="#fa061e"/>
+      <stop offset="0.8214" stop-color="#f90418"/>
+      <stop offset="0.8929" stop-color="#f90315"/>
+      <stop offset="0.9643" stop-color="#ef2731"/>
+    </linearGradient>
+    <linearGradient id="sn-shade0" gradientUnits="userSpaceOnUse"
+        x1="3531.5" y1="7165.3" x2="4352.4" y2="6632.2">
+      <stop offset="0.0833" stop-color="#9b025e"/>
+      <stop offset="0.25" stop-color="#91024c"/>
+      <stop offset="0.4167" stop-color="#91062f"/>
+      <stop offset="0.5833" stop-color="#8a0037"/>
+      <stop offset="0.75" stop-color="#92003b"/>
+      <stop offset="0.9167" stop-color="#9a003f"/>
+    </linearGradient>
+    <linearGradient id="sn-shade1" gradientUnits="userSpaceOnUse"
+        x1="2881.8" y1="6356.3" x2="4452.5" y2="7156.6">
+      <stop offset="0.1" stop-color="#7b293a"/>
+      <stop offset="0.3" stop-color="#790231"/>
+      <stop offset="0.5" stop-color="#79012c"/>
+      <stop offset="0.7" stop-color="#77002d"/>
+      <stop offset="0.9" stop-color="#800033"/>
+    </linearGradient>
+    <linearGradient id="sn-shade2" gradientUnits="userSpaceOnUse"
+        x1="3058.5" y1="6530.9" x2="3994.5" y2="6679.2">
+      <stop offset="0.125" stop-color="#610123"/>
+      <stop offset="0.375" stop-color="#610123"/>
+      <stop offset="0.625" stop-color="#650026"/>
+      <stop offset="0.875" stop-color="#6e002a"/>
+    </linearGradient>
+    <linearGradient id="sn-flame" gradientUnits="userSpaceOnUse"
+        x1="2278.1" y1="5659.5" x2="7507.9" y2="7988">
+      <stop offset="0.0357" stop-color="#f37f50"/>
+      <stop offset="0.1071" stop-color="#f9491f"/>
+      <stop offset="0.1786" stop-color="#fc4324"/>
+      <stop offset="0.25" stop-color="#fc4028"/>
+      <stop offset="0.3214" stop-color="#fb3e28"/>
+      <stop offset="0.3929" stop-color="#fa362f"/>
+      <stop offset="0.4643" stop-color="#fa3325"/>
+      <stop offset="0.5357" stop-color="#fa4224"/>
+      <stop offset="0.6071" stop-color="#f95020"/>
+      <stop offset="0.6786" stop-color="#f95c1c"/>
+      <stop offset="0.75" stop-color="#f96617"/>
+      <stop offset="0.8214" stop-color="#f87110"/>
+      <stop offset="0.8929" stop-color="#f87b0b"/>
+      <stop offset="0.9643" stop-color="#f77c0b"/>
+    </linearGradient>
+    <linearGradient id="sn-blade" gradientUnits="userSpaceOnUse"
+        x1="4772" y1="6290" x2="4772" y2="4680">
+      <stop offset="0.0556" stop-color="#68a3f0"/>
+      <stop offset="0.1667" stop-color="#5a96ec"/>
+      <stop offset="0.2778" stop-color="#4d84e3"/>
+      <stop offset="0.3889" stop-color="#3c6fd8"/>
+      <stop offset="0.5" stop-color="#2f60cc"/>
+      <stop offset="0.6111" stop-color="#2959c0"/>
+      <stop offset="0.7222" stop-color="#2450b2"/>
+      <stop offset="0.8333" stop-color="#214bad"/>
+      <stop offset="0.9444" stop-color="#3052ac"/>
     </linearGradient>
   </defs>
 
-  <!-- Badge. Radius 112 matches the iOS/macOS squircle proportion closely enough
-       that the generated app icons don't look pinched when the OS masks them. -->
-  <rect width="512" height="512" rx="112" fill="url(#senaia-bg)"/>
+  <!-- Disc. The source art is a circular crop, transparent outside; reproducing
+       it as a real circle keeps the edge clean at every raster size. -->
+  <circle cx="512" cy="512" r="512" fill="#928a8a"/>
 
-  <!-- The mark is a relay path, not a letterform traced from a font: two opposed
-       arcs reading as an "S" while describing what the gateway does — take a
-       message in on one side, hand it out on the other. Stroke-width 52 with
-       round caps keeps it solid at 16px, where thin detail turns to mush. -->
-  <path d="M 336 178 A 80 80 0 1 0 256 258 A 80 80 0 1 1 176 338"
-        fill="none" stroke="#ffffff" stroke-width="52"
-        stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Active-agent spark. The one warm note against the cool badge, and the
-       detail that stops this reading as a generic blue "S".
-       Placed so its edge clears the stroke's upper terminus by ~12px: any
-       closer and the two merge into a single blob once rendered at 32px. -->
-  <circle cx="386" cy="132" r="30" fill="#fbbf24"/>
+  <!-- Mark and wordmark, traced from _DOC/brand/icon.png. The group transform is
+       potrace's own: coordinates are 10x pixels with y flipped. -->
+  <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" stroke="#ffffff" stroke-width="15" stroke-linejoin="round">
+    <!-- Silhouette of the fused upper+middle blades, stroked to carry the pale
+         edge the source art has. It is drawn first so the fills that follow
+         cover the stroke's inner half, leaving the halo outside the shape. -->
+    <path d="M6875 9242 c-6 -5 -28 -16 -50 -25 -22 -9 -98 -41 -169 -72 -72 -31
+-189 -81 -260 -110 -122 -50 -524 -219 -591 -249 -62 -28 -295 -127 -445 -190
+-85 -35 -218 -92 -295 -126 -77 -34 -169 -75 -205 -90 -705 -308 -1150 -727
+-1415 -1335 -70 -161 -149 -391 -164 -480 -7 -38 -17 -86 -21 -105 -20 -78
+-62 -265 -99 -445 -22 -104 -58 -264 -79 -355 -22 -91 -50 -208 -61 -260 -12
+-52 -28 -122 -36 -155 -7 -33 -26 -114 -40 -180 -14 -66 -32 -149 -40 -185
+-78 -349 -96 -466 -71 -476 23 -9 39 8 100 100 29 45 92 142 141 216 339 519
+420 625 639 828 322 300 570 454 1059 658 98 41 271 114 385 163 114 48 306
+130 427 181 121 51 281 118 355 150 74 32 214 90 310 130 96 40 204 88 240
+108 36 20 77 43 92 52 68 38 200 143 288 230 271 267 431 613 470 1020 18 192
+4 211 -118 160 -42 -18 -102 -43 -132 -56 -212 -89 -535 -226 -543 -231 -5 -3
+17 28 50 68 191 236 304 525 344 876 6 56 9 117 5 137 -8 44 -46 69 -71 48z" fill="url(#sn-sweep)"/>
+    <!-- Upper blade: red at the convergence tip running to magenta at the crown.
+         No stroke — the two blades meet as a bare colour edge in the source. -->
+    <path d="M6875 9242 c-6 -5 -28 -16 -50 -25 -22 -9 -98 -41 -169 -72 -72 -31
+-189 -81 -260 -110 -122 -50 -524 -219 -591 -249 -62 -28 -295 -127 -445 -190
+-85 -35 -218 -92 -295 -126 -77 -34 -169 -75 -205 -90 -705 -308 -1150 -727
+-1415 -1335 -70 -161 -149 -391 -164 -480 -7 -38 -17 -86 -21 -105 -20 -78
+-62 -265 -99 -445 -22 -104 -58 -264 -79 -355 -22 -91 -50 -208 -61 -260 -12
+-52 -28 -122 -36 -155 -21 -84 -23 -130 -7 -130 9 0 33 51 62 130 224 613 513
+975 1074 1344 11 8 51 34 87 57 36 24 71 50 78 58 14 17 7 36 -13 36 -8 0 -13
+11 -13 25 0 28 -46 103 -68 111 -8 3 -21 20 -30 36 -20 41 -9 55 106 131 219
+143 356 211 824 412 99 42 230 98 290 125 296 129 456 198 555 240 601 254
+569 237 657 348 203 254 313 532 354 889 6 56 9 117 5 137 -8 44 -46 69 -71
+48z M4430 6645 c-7 -8 -25 -15 -39 -15 -15 0 -42 -11 -61 -25 -19 -14
+-41 -25 -50 -25 -9 0 -31 -11 -50 -25 -19 -14 -39 -25 -45 -25 -7 0 -51 -25
+-100 -55 -48 -30 -89 -55 -91 -55 -8 0 -121 -83 -192 -142 -174 -143 -327
+-314 -444 -493 -80 -123 -198 -348 -198 -378 0 -7 -5 -18 -10 -23 -28 -28
+-138 -378 -194 -614 -20 -85 -42 -176 -48 -203 -12 -48 -3 -77 21 -63 11 7
+121 173 121 182 0 3 9 17 20 31 11 14 20 34 20 43 0 10 10 25 23 33 26 17 107
+145 107 169 0 8 18 33 40 54 22 22 40 42 40 47 0 10 117 164 204 267 189 225
+482 471 729 613 26 16 47 32 47 38 0 6 4 7 10 4 5 -3 34 9 62 28 100 64 113
+71 136 73 30 4 54 24 48 40 -4 11 -1 11 14 2 16 -11 23 -9 40 10 11 12 27 22
+35 22 8 0 18 8 24 17 8 14 12 15 25 4 16 -14 66 7 66 28 0 13 -49 43 -60 36
+-5 -3 -10 11 -12 32 -3 34 -7 39 -39 48 -49 13 -86 46 -65 57 21 12 40 101 27
+127 -6 11 -11 31 -11 44 0 55 -58 73 -101 31 -19 -18 -34 -24 -46 -20 -15 6
+-12 12 21 40 24 20 36 37 32 44 -10 17 -41 15 -56 -3z" fill="url(#sn-sweep)" stroke="none"/>
+    <!-- Shading band along that blade's inner edge, lifted out of the blade
+         because one linear gradient cannot carry both it and the run of hue.
+         Three nested luminance contours, light to dark: the band is a smooth
+         ramp in the source, and a single hard-edged shape reads as a blot. -->
+    <path d="M4724 7556 c-3 -7 -24 -16 -47 -19 -37 -6 -109 -34 -312 -121 -388
+-166 -755 -443 -982 -742 -93 -122 -102 -152 -223 -742 -42 -200 -36 -213 25
+-62 224 558 566 942 1115 1255 101 58 495 255 509 255 12 0 91 71 91 81 0 4
+-25 17 -55 30 -38 15 -55 28 -55 40 0 31 -56 52 -66 25z M3453 6967 c-25 -58 -63 -166 -63 -179 0 -20 19 -5 31 25 7 17 35 53
+63 79 50 48 50 48 30 84 -27 52 -36 51 -61 -9z" fill="url(#sn-shade0)" stroke="none"/>
+    <path d="M4235 7310 c-73 -12 -271 -123 -435 -243 -202 -150 -473 -450 -505
+-562 -24 -82 -145 -630 -145 -656 0 -20 18 -7 25 18 10 43 128 283 188 384 83
+141 193 284 314 409 166 173 240 233 572 460 77 52 94 70 70 70 -15 0 -79 62
+-79 77 0 7 6 13 14 13 16 0 40 27 29 32 -4 2 -26 1 -48 -2z" fill="url(#sn-shade1)" stroke="none"/>
+    <path d="M3783 7027 c-15 -13 -45 -33 -65 -46 -21 -12 -52 -39 -70 -60 -18
+-20 -57 -57 -86 -81 -45 -37 -143 -154 -230 -274 -30 -41 -42 -83 -107 -386
+-47 -221 -56 -277 -42 -259 2 2 33 65 70 139 103 211 224 398 346 534 75 84
+158 171 220 230 36 33 76 71 89 84 16 15 21 27 15 33 -16 16 -44 -2 -50 -32
+-7 -36 -30 -38 -39 -2 -5 18 -2 30 8 37 27 20 33 56 9 56 -14 0 -21 6 -21 19
+0 31 -16 33 -47 8z" fill="url(#sn-shade2)" stroke="none"/>
+    <!-- Middle blade: red to orange. Overlaps the upper blade by a pixel so no
+         hairline of disc grey can open along the seam. -->
+    <path d="M7205 8394 c-107 -46 -131 -57 -410 -174 -132 -56 -275 -119 -317
+-141 -64 -32 -207 -95 -548 -239 -100 -42 -290 -125 -552 -239 -62 -27 -194
+-84 -293 -126 -472 -203 -605 -270 -831 -417 -104 -69 -145 -111 -125 -131 6
+-6 11 -18 11 -27 0 -9 13 -26 30 -38 39 -29 63 -66 63 -97 0 -14 8 -32 19 -39
+18 -13 15 -17 -49 -58 -297 -194 -415 -284 -568 -436 -295 -293 -477 -589
+-630 -1027 -16 -44 -34 -87 -40 -95 -7 -8 -20 -48 -29 -87 -109 -487 -129
+-609 -102 -619 30 -12 93 68 87 109 -1 10 4 46 13 80 8 34 29 123 47 197 52
+220 163 568 189 594 5 5 10 16 10 23 0 32 119 258 208 393 116 176 204 276
+372 419 110 94 223 181 234 181 2 0 43 25 91 55 49 30 93 55 100 55 6 0 26 11
+45 25 19 14 41 25 50 25 9 0 31 11 50 25 19 14 46 25 61 25 14 0 32 7 39 15 7
+8 19 15 28 15 9 0 0 -14 -24 -35 -38 -34 -38 -35 -20 -50 29 -22 51 -18 70 11
+22 32 69 31 74 -2 3 -18 -1 -20 -28 -16 -62 9 -70 -28 -17 -85 23 -25 47 -16
+47 18 0 11 5 19 10 19 21 0 0 -86 -26 -105 -16 -11 -15 -15 12 -49 16 -20 37
+-36 46 -36 33 0 48 -12 48 -40 0 -27 21 -56 33 -44 3 3 16 -1 29 -10 36 -24
+22 -28 408 136 135 58 344 147 465 198 121 51 281 118 355 150 74 32 214 90
+310 130 96 40 204 88 240 108 36 20 77 43 92 52 68 38 200 143 288 230 271
+267 430 612 470 1021 19 195 3 213 -135 153z M4644 6199 c-3 -6 -22 -17 -40 -25 -34 -14 -42 -28 -24 -39 10 -6 75
+18 97 37 10 8 10 14 2 24 -14 17 -25 18 -35 3z" fill="url(#sn-flame)" stroke="none"/>
+    <!-- Lower blade. -->
+    <path d="M5799 6258 c-41 -17 -166 -70 -279 -118 -113 -48 -259 -110 -325
+-138 -418 -175 -752 -320 -830 -359 -355 -177 -657 -498 -818 -871 -47 -110
+-39 -119 69 -73 38 16 119 50 179 76 61 26 146 62 190 80 44 18 130 54 190 80
+61 26 135 57 165 69 30 13 87 37 125 53 39 17 140 60 225 96 85 36 259 109
+385 162 127 53 243 102 260 108 326 130 565 457 565 777 0 96 -3 97 -101 58z" fill="url(#sn-blade)"/>
+    <!-- SENAIA wordmark, traced outlines: no font dependency at render time.
+         Thinner fringe than the blades — the source's is barely a pixel here,
+         and at blade weight it hollows the counters out at small sizes. -->
+    <path d="M2235 4271 c-272 -45 -416 -162 -432 -349 -17 -201 65 -281 392 -381
+170 -52 214 -91 185 -161 -24 -58 -75 -75 -225 -74 -155 1 -236 24 -340 99
+-63 45 -88 54 -100 35 -8 -13 -55 -240 -55 -266 0 -82 487 -146 690 -91 223
+60 350 196 350 374 0 179 -84 247 -444 359 -108 33 -146 62 -146 110 0 151
+372 147 566 -5 44 -35 57 -17 82 111 31 158 30 162 -18 182 -117 47 -384 77
+-505 57z M3047 4243 c-2 -5 -9 -30 -15 -58 -7 -27 -23 -97 -36 -155 -14 -58
+-46 -199 -71 -315 -50 -227 -84 -380 -117 -517 -11 -48 -18 -94 -15 -102 6
+-14 52 -16 411 -16 l405 0 14 53 c22 80 37 169 31 178 -3 5 -117 9 -255 9
+-231 0 -249 1 -249 18 0 9 13 69 28 132 l27 115 237 5 c130 3 240 8 244 12 11
+11 55 208 49 219 -4 5 -104 9 -235 9 -126 0 -231 3 -233 8 -2 4 5 44 15 90
+l20 82 247 0 c183 0 251 3 263 13 13 10 58 177 58 215 0 14 -815 19 -823 5z M4095 4238 c-3 -7 -11 -42 -19 -78 -8 -36 -44 -198 -80 -360 -37
+-162 -78 -347 -92 -410 -14 -63 -34 -152 -45 -198 -11 -46 -18 -90 -15 -98 7
+-19 258 -21 273 -1 6 6 31 109 57 227 48 225 76 349 105 464 l17 69 21 -54
+c12 -30 45 -110 73 -179 119 -289 144 -349 172 -420 50 -127 39 -120 183 -120
+141 0 127 -10 150 105 11 52 72 323 200 889 20 91 32 163 27 168 -5 5 -69 7
+-142 6 l-134 -3 -7 -30 c-18 -86 -121 -543 -126 -562 -6 -27 -19 -30 -26 -5
+-3 9 -29 76 -59 147 -30 72 -85 203 -123 293 l-67 162 -170 0 c-126 0 -170 -3
+-173 -12z M5693 4238 c-6 -7 -61 -101 -123 -208 -134 -231 -324 -557 -443 -762
+-47 -81 -87 -155 -89 -165 -3 -17 8 -18 152 -18 l154 0 65 118 64 117 197 0
+196 0 13 -107 c7 -59 17 -113 23 -120 16 -20 287 -18 294 2 3 8 -1 69 -10 137
+-23 178 -66 490 -71 513 -2 11 -9 61 -15 110 -6 50 -17 133 -25 185 -8 52 -17
+121 -21 153 l-6 57 -173 0 c-126 0 -175 -3 -182 -12z m136 -530 c9 -80 15
+-151 13 -157 -4 -13 -228 -16 -236 -3 -4 6 93 186 172 322 l27 45 3 -30 c2
+-16 11 -96 21 -177z M6536 4238 c-21 -73 -45 -192 -41 -199 4 -5 42 -9 85 -9 43 0 81 -3
+83 -7 4 -6 -79 -390 -148 -690 -5 -22 -10 -23 -94 -23 l-90 0 -15 -52 c-19
+-69 -35 -161 -29 -170 2 -5 152 -8 333 -8 l329 0 10 38 c20 74 39 177 35 184
+-3 4 -43 8 -90 8 -76 0 -85 2 -81 18 3 9 13 51 22 92 28 128 53 241 79 350 13
+58 32 140 41 183 l17 77 88 0 c74 0 89 3 95 18 13 29 44 186 39 194 -9 14
+-664 10 -668 -4z M7722 4238 c-11 -14 -46 -73 -257 -438 -78 -135 -201 -348 -274 -473
+-85 -145 -130 -232 -124 -238 5 -5 73 -8 158 -7 l149 3 64 118 64 117 198 0
+197 0 8 -57 c4 -32 9 -76 11 -98 10 -92 -4 -85 160 -85 117 0 146 3 150 15 3
+8 -9 119 -26 247 -18 128 -38 285 -46 348 -7 63 -16 125 -19 138 -3 12 -17
+109 -30 214 -14 105 -28 194 -31 199 -9 15 -340 11 -352 -3z m132 -509 c10
+-93 16 -172 13 -175 -2 -3 -56 -3 -120 -2 l-115 3 97 172 c53 95 99 173 102
+173 3 0 13 -77 23 -171z" fill="#fb031a" stroke-width="6"/>
+  </g>
 </svg>
