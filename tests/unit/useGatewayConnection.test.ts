@@ -288,7 +288,13 @@ describe("useGatewayConnection", () => {
     expect(captured.clientName).toBe("openclaw-control-ui");
   });
 
-  it("does_not_auto_connect_without_a_last_known_good_state", async () => {
+  // Renamed from does_not_auto_connect_without_a_last_known_good_state. Since #140
+  // ("unblock Hermes adapter"), an auto-managed adapter (openclaw/hermes/demo)
+  // with a saved URL counts as having a persisted profile, so the reconnect
+  // prompt is suppressed and Studio connects on its own. Custom adapters still
+  // prompt — covered by loads_custom_adapter_type_without_requiring_a_token and
+  // still_prompts_to_reconnect_for_custom_with_last_known_good_state below.
+  it("does_not_prompt_for_hermes_with_a_saved_url_and_no_last_known_good", async () => {
     const { useGatewayConnection, captured } = await setupAndImportHook(null);
     const coordinator = {
       loadSettingsEnvelope: async () => ({
@@ -334,7 +340,7 @@ describe("useGatewayConnection", () => {
     await waitFor(() => {
       expect(screen.getByTestId("gatewayUrl")).toHaveTextContent("ws://localhost:18789");
     });
-    expect(screen.getByTestId("shouldPromptForConnect")).toHaveTextContent("yes");
+    expect(screen.getByTestId("shouldPromptForConnect")).toHaveTextContent("no");
     expect(captured.url).toBeNull();
   });
 
@@ -606,7 +612,7 @@ describe("useGatewayConnection", () => {
       expect(screen.getByTestId("gatewayUrl")).toHaveTextContent("ws://localhost:18789");
     });
     expect(screen.getByTestId("selectedAdapterType")).toHaveTextContent("hermes");
-    expect(screen.getByTestId("shouldPromptForConnect")).toHaveTextContent("yes");
+    expect(screen.getByTestId("shouldPromptForConnect")).toHaveTextContent("no");
     expect(captured.url).toBeNull();
   });
 

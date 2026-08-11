@@ -228,9 +228,20 @@ export async function hydrateAgentFleetFromGateway(params: {
           if (!recoveredName || isTemporarySkillAgentName(recoveredName)) {
             return agent;
           }
+          // `name` is the gateway roster name and `identity.name` is the one
+          // declared in IDENTITY.md — the derivation layer surfaces them as
+          // runtimeName and identityName respectively. Writing the recovered
+          // name into both collapsed that distinction, so a roster name of
+          // "Two" was reported as the identity name.
+          //
+          // Only fall back to the recovered name when the roster has nothing
+          // usable; the guard above already established recoveredName is not a
+          // temporary skill-agent name, so the filter below still keeps the row.
+          const listedName = agent.name?.trim();
+          const keepListedName = Boolean(listedName) && !isTemporarySkillAgentName(listedName);
           return {
             ...agent,
-            name: recoveredName,
+            name: keepListedName ? agent.name : recoveredName,
             identity: {
               ...(agent.identity ?? {}),
               name: recoveredName,

@@ -215,7 +215,9 @@ export const AgentBrainPanel = ({
         />
       </section>
     ),
-    [agentFilesLoading, agentFilesSaving, draft.identity, setIdentityField],
+    // agentFiles is read above for the IDENTITY.md path/workspace; without it in
+    // the deps this callback keeps the first render's provenance forever.
+    [agentFiles, agentFilesLoading, agentFilesSaving, draft.identity, setIdentityField],
   );
 
   const renderedSections = useMemo(() => {

@@ -353,7 +353,8 @@ describe("AgentChatPanel controls", () => {
     fireEvent.change(textarea, { target: { value: "follow up" } });
     fireEvent.click(screen.getByRole("button", { name: "Send" }));
 
-    expect(onSend).toHaveBeenCalledWith("follow up");
+    // onSend gained an attachments argument; toHaveBeenCalledWith is exact-arity.
+    expect(onSend).toHaveBeenCalledWith("follow up", []);
   });
 
   it("renders_queue_bar_and_supports_removing_queued_messages", () => {
@@ -613,6 +614,6 @@ describe("AgentChatPanel controls", () => {
     expect(onSend).not.toHaveBeenCalled();
 
     fireEvent.keyDown(textarea, { key: "Enter", code: "Enter" });
-    expect(onSend).toHaveBeenCalledWith("draft text");
+    expect(onSend).toHaveBeenCalledWith("draft text", []);
   });
 });
