@@ -174,6 +174,7 @@ describe("useRuntimeConnection", () => {
     render(createElement(Probe));
 
     expect(screen.getByTestId("providerId")).toHaveTextContent("claw3d");
-    expect(screen.getByTestId("providerLabel")).toHaveTextContent("Claw3D Runtime");
+    // Display label, rebranded. The adapter id it selects on is still "claw3d".
+    expect(screen.getByTestId("providerLabel")).toHaveTextContent("SENAIA-IA Runtime");
   });
 });
