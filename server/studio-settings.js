@@ -82,21 +82,51 @@ const readOpenclawGatewayDefaults = (env = process.env) => {
   }
 };
 
+/**
+ * Gateway defaults from the environment.
+ *
+ * .env.example documents CLAW3D_GATEWAY_URL/_TOKEN as the runtime override that
+ * "takes effect on restart without a rebuild", and the Next side already honours
+ * them in buildEnvGatewayDefaults (src/lib/studio/settings-store.ts). The proxy
+ * read only settings.json and then fell back to ws://localhost:18789, so in any
+ * deployment where the gateway is a separate host — every container deployment —
+ * it dialled its own loopback and the connection was refused by the allowlist.
+ */
+const readEnvGatewayDefaults = (env = process.env) => {
+  const url = typeof env.CLAW3D_GATEWAY_URL === "string" ? env.CLAW3D_GATEWAY_URL.trim() : "";
+  const token = typeof env.CLAW3D_GATEWAY_TOKEN === "string" ? env.CLAW3D_GATEWAY_TOKEN.trim() : "";
+  const adapterType =
+    typeof env.CLAW3D_GATEWAY_ADAPTER_TYPE === "string"
+      ? env.CLAW3D_GATEWAY_ADAPTER_TYPE.trim()
+      : "";
+  if (!url && !token && !adapterType) return null;
+  return { url, token, adapterType };
+};
+
 const loadUpstreamGatewaySettings = (env = process.env) => {
   const settingsPath = resolveStudioSettingsPath(env);
   const parsed = readJsonFile(settingsPath);
   const gateway = parsed && typeof parsed === "object" ? parsed.gateway : null;
   const url = typeof gateway?.url === "string" ? gateway.url.trim() : "";
   const token = typeof gateway?.token === "string" ? gateway.token.trim() : "";
-  const adapterType =
+  const storedAdapterType =
     typeof gateway?.adapterType === "string" && gateway.adapterType.trim()
       ? gateway.adapterType.trim()
-      : "openclaw";
-  if (!token && adapterType === "openclaw") {
+      : "";
+
+  // Precedence, most specific first: stored settings (what the operator set in
+  // the UI) -> environment -> a sibling openclaw.json on the same host -> default.
+  const envDefaults = readEnvGatewayDefaults(env);
+  const adapterType = storedAdapterType || envDefaults?.adapterType || "openclaw";
+
+  const resolvedUrl = url || envDefaults?.url || "";
+  const resolvedToken = token || envDefaults?.token || "";
+
+  if (!resolvedToken && adapterType === "openclaw") {
     const defaults = readOpenclawGatewayDefaults(env);
     if (defaults) {
       return {
-        url: url || defaults.url,
+        url: resolvedUrl || defaults.url,
         token: defaults.token,
         adapterType,
         settingsPath,
@@ -104,8 +134,8 @@ const loadUpstreamGatewaySettings = (env = process.env) => {
     }
   }
   return {
-    url: url || DEFAULT_GATEWAY_URL,
-    token,
+    url: resolvedUrl || DEFAULT_GATEWAY_URL,
+    token: resolvedToken,
     adapterType,
     settingsPath,
   };
