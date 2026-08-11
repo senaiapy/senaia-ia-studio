@@ -22,6 +22,12 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # uses this; it is only the initial value shown in the connection settings UI.
 ARG NEXT_PUBLIC_GATEWAY_URL=""
 ENV NEXT_PUBLIC_GATEWAY_URL=$NEXT_PUBLIC_GATEWAY_URL
+# Security headers are baked into the routes manifest by `next build`, so this
+# is a build-time decision. Default 0: with it on, the CSP's
+# upgrade-insecure-requests rewrites the app's own assets to https, which fails
+# on any deployment not fronted by TLS.
+ARG STUDIO_FORCE_HTTPS=0
+ENV STUDIO_FORCE_HTTPS=$STUDIO_FORCE_HTTPS
 RUN npm run build
 
 FROM node:20-slim AS runner

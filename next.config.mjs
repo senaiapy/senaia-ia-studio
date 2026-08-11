@@ -10,6 +10,12 @@ import { fileURLToPath } from "node:url";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Whether this deployment is reached over HTTPS. Read at BUILD time, because
+// the headers are baked into the routes manifest by `next build`.
+// Off by default so a plain-HTTP deployment works out of the box; set
+// STUDIO_FORCE_HTTPS=1 when the studio sits behind a TLS-terminating proxy.
+const forceHttps = process.env.STUDIO_FORCE_HTTPS === "1";
+
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
@@ -33,7 +39,15 @@ const securityHeaders = [
       "media-src 'self' blob: data: http: https:",
       "worker-src 'self' blob:",
       "object-src 'none'",
-      "upgrade-insecure-requests",
+      // Only when the deployment is actually served over TLS.
+      //
+      // This directive rewrites every subresource request to https://. Behind a
+      // TLS proxy that is what you want. On a plain-HTTP deployment — published
+      // ports, no proxy — it upgrades the app's own CSS, JS and fonts to a
+      // scheme nothing is listening on, and every one fails with
+      // ERR_SSL_PROTOCOL_ERROR. The page still returns 200 and renders as bare
+      // unstyled HTML, so it looks like a broken build rather than a header.
+      ...(forceHttps ? ["upgrade-insecure-requests"] : []),
     ].join("; "),
   },
   {
@@ -58,7 +72,9 @@ const securityHeaders = [
   },
 ];
 
-if (process.env.NODE_ENV === "production") {
+// HSTS is meaningless (and ignored) over plain HTTP, and pinning a host to
+// HTTPS for a year when no TLS listener exists would lock users out.
+if (process.env.NODE_ENV === "production" && forceHttps) {
   securityHeaders.push({
     key: "Strict-Transport-Security",
     value: "max-age=31536000; includeSubDomains",
